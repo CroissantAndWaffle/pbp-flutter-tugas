@@ -1,16 +1,24 @@
 # counter_7
+Rafa Maritza
+2106651944
+B
 
-A new Flutter project.
+## <em>stateless widget</em> dan <em>stateful widget</em>
+<em>stateless widget</em> merupakan widget yang tidak dapat diubah ketika suatu aplikasi sudah dibuat. Sedangkan <em>stateful widget</em> merupakan widget yang dapat diubah ketika aplikasi sudah dibuat. Jadi jika pada suatu aplikasi ada perubahan secara dinamis maka harus menggunakan <em>stateful widget</em>.
 
-## Getting Started
+## widget yang dipakai
+Widget yang saya pakai dalam membuat aplikasi counter_7 adalah widget text dan floatingactionbutton.
 
-This project is a starting point for a Flutter application.
+## fungsi dari setState()
+setState() berfungsi untuk memberitahu framework bahwa suatu state telah diubah yang akan mempengaruhi tampilan UI. Contohnya pada aplikasi ini adalah value counter yang diubah memakai setState() dan ditampilkan pada UI.
 
-A few resources to get you started if this is your first Flutter project:
+## perbedaan antara const dengan final
+final harus memiliki initializer dan ketika sudah diberi value maka tidak dapat diubah lagi. const berarti valuenya ditentukan saat compile dan benar-benar akan menjadi immutable atau tidak dapat diubah lagi.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## implementasi
+Membuat fungsi decrement untuk mengimplementasikan logika sesuai pada tugas. Menggunakan conditional pada widget text untuk menentukan ganjil atau genapnya angka yang ditampilakan. Membuat widget floatingactionbutton decrement dan padding dan row untuk membuat posisi kedua button sesuai dengan tugas.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## refrensi
+- https://www.geeksforgeeks.org/flutter-stateful-vs-stateless-widgets/
+- https://api.flutter.dev/flutter/widgets/State/setState.html
+- https://news.dartlang.org/2012/06/const-static-final-oh-my.html
