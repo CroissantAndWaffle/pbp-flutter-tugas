@@ -7,7 +7,7 @@ B
 <em>stateless widget</em> merupakan widget yang tidak dapat diubah ketika suatu aplikasi sudah dibuat. Sedangkan <em>stateful widget</em> merupakan widget yang dapat diubah ketika aplikasi sudah dibuat. Jadi jika pada suatu aplikasi ada perubahan secara dinamis maka harus menggunakan <em>stateful widget</em>.
 
 ## widget yang dipakai
-Widget yang saya pakai dalam membuat aplikasi counter_7 adalah widget text dan floatingactionbutton.
+Widget yang saya pakai dalam membuat aplikasi counter_7 adalah widget text yang saya tempatkan pada padding dan row. Saya memakai floatingactionbutton untuk menampilkan button decrement dan increment. Saya juga memakai banyak stateless widget yang sudah ada saat aplikasi dibuat.
 
 ## fungsi dari setState()
 setState() berfungsi untuk memberitahu framework bahwa suatu state telah diubah yang akan mempengaruhi tampilan UI. Contohnya pada aplikasi ini adalah value counter yang diubah memakai setState() dan ditampilkan pada UI.

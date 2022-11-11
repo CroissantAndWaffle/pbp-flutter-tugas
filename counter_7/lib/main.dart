@@ -49,6 +49,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  bool _visibility = false;
 
   void _incrementCounter() {
     setState(() {
@@ -59,6 +60,11 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
     });
+    if (_counter > 0) {
+      setState(() {
+        _visibility = true;
+      });
+    }
   }
 
   void _decrementCounter() {
@@ -67,6 +73,11 @@ class _MyHomePageState extends State<MyHomePage> {
         _counter--;
       }
     });
+    if (_counter == 0) {
+      setState(() {
+        _visibility = false;
+      });
+    }
   }
 
   @override
@@ -127,20 +138,28 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          padding: const EdgeInsets.all(16),
+          child: Stack(
             children: <Widget>[
-              FloatingActionButton(
-                onPressed: _decrementCounter,
-                tooltip: 'Decrement',
-                child: const Icon(Icons.remove),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: FloatingActionButton(
+                  onPressed: _incrementCounter,
+                  tooltip: 'Increment',
+                  child: const Icon(Icons.add),
+                ),
               ),
-              FloatingActionButton(
-                onPressed: _incrementCounter,
-                tooltip: 'Increment',
-                child: const Icon(Icons.add),
-              )
+              Align(
+                alignment: Alignment.bottomLeft,
+                child: Visibility(
+                  visible: _visibility,
+                  child: FloatingActionButton(
+                    onPressed: _decrementCounter,
+                    tooltip: 'Decrement',
+                    child: const Icon(Icons.remove),
+                  ),
+                ),
+              ),
             ],
           ),
         ));
