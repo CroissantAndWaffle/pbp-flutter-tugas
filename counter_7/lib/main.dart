@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:counter_7/budget_form.dart';
+import 'package:counter_7/budget_data.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,31 +26,27 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Program Counter'),
+      home: MyHomePage(counter: 0, listBudget: const []),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  MyHomePage({super.key, this.counter = 0, this.listBudget = const []});
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+  final String title = 'Program Counter';
+  int counter;
+  List<Budget> listBudget;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<MyHomePage> createState() =>
+      _MyHomePageState(counter: counter, listBudget: listBudget);
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  _MyHomePageState({this.counter = 0, this.listBudget = const []});
+  int counter;
+  List<Budget> listBudget;
   bool _visibility = false;
 
   void _incrementCounter() {
@@ -58,9 +56,9 @@ class _MyHomePageState extends State<MyHomePage> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      _counter++;
+      counter++;
     });
-    if (_counter > 0) {
+    if (counter > 0) {
       setState(() {
         _visibility = true;
       });
@@ -69,11 +67,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _decrementCounter() {
     setState(() {
-      if (_counter > 0) {
-        _counter--;
+      if (counter > 0) {
+        counter--;
       }
     });
-    if (_counter == 0) {
+    if (counter == 0) {
       setState(() {
         _visibility = false;
       });
@@ -93,6 +91,55 @@ class _MyHomePageState extends State<MyHomePage> {
           // Here we take the value from the MyHomePage object that was created by
           // the App.build method, and use it to set our appbar title.
           title: Text(widget.title),
+        ),
+        drawer: Drawer(
+          child: Column(
+            children: [
+              // Menambahkan clickable menu
+              ListTile(
+                title: const Text('counter_7'),
+                onTap: () {
+                  // Route menu ke halaman utama
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => BudgetFormPage(
+                              counter: counter,
+                              listBudget: listBudget,
+                            )),
+                  );
+                },
+              ),
+              ListTile(
+                title: const Text('Tambah Budget'),
+                onTap: () {
+                  // Route menu ke halaman form
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => BudgetDataPage(
+                              counter: counter,
+                              listBudget: listBudget,
+                            )),
+                  );
+                },
+              ),
+              ListTile(
+                title: const Text('Data Budget'),
+                onTap: () {
+                  // Route menu ke halaman form
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => BudgetFormPage(
+                              counter: counter,
+                              listBudget: listBudget,
+                            )),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
         body: Center(
           // Center is a layout widget. It takes a single child and positions it
@@ -114,23 +161,23 @@ class _MyHomePageState extends State<MyHomePage> {
               // horizontal).
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                if (_counter % 2 == 0) ...[
+                if (counter % 2 == 0) ...[
                   const Text(
                     'GENAP',
                     style: TextStyle(color: Colors.red),
                   ),
                   Text(
-                    '$_counter',
+                    '$counter',
                     style: Theme.of(context).textTheme.headline4,
                   ),
                 ],
-                if (_counter % 2 == 1) ...[
+                if (counter % 2 == 1) ...[
                   const Text(
                     'GANJIL',
                     style: TextStyle(color: Colors.blue),
                   ),
                   Text(
-                    '$_counter',
+                    '$counter',
                     style: Theme.of(context).textTheme.headline4,
                   ),
                 ],
@@ -144,6 +191,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Align(
                 alignment: Alignment.bottomRight,
                 child: FloatingActionButton(
+                  heroTag: 'btnAdd',
                   onPressed: _incrementCounter,
                   tooltip: 'Increment',
                   child: const Icon(Icons.add),
@@ -154,6 +202,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Visibility(
                   visible: _visibility,
                   child: FloatingActionButton(
+                    heroTag: 'btnRemove',
                     onPressed: _decrementCounter,
                     tooltip: 'Decrement',
                     child: const Icon(Icons.remove),
