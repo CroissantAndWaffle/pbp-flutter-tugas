@@ -40,9 +40,10 @@ Flutter memiliki banyak sekali event listener seperti onPressed, onPointerCancel
 Widget Navigator menampilkan layar sebagai tumpukan menggunakan animasi transisi yang benar untuk platform target. Untuk menavigasi ke layar baru, akses Navigator melalui BuildContext rute dan panggil metode imperatif seperti push() atau pop()
 
 ### Implementasi
+Mengimplementasikan data passing pada ketiga file dart agar data tidak hilang saat melihat screen lain. Membuat halaman input untuk menyimpan data yang diberikan serta membuat objek yang digunakan untuk menyimpan data yang diinput. Membuat halaman yang menampilkan data yang sudah diinput. 
 
 ### Referensi
 - https://docs.flutter.dev/cookbook/navigation/navigation-basics
 - https://api.flutter.dev/flutter/widgets/Navigator/pushReplacement.html
 - https://api.flutter.dev/flutter/widgets/Listener-class.html
-- 
+- https://docs.flutter.dev/development/ui/navigation
