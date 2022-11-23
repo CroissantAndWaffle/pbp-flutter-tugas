@@ -1,32 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:counter_7/main.dart';
-import 'package:counter_7/page/budget_data.dart';
+import 'package:counter_7/model/budget_model.dart';
+import 'package:counter_7/page/drawer.dart';
 
 class BudgetFormPage extends StatefulWidget {
-  BudgetFormPage({super.key, this.counter = 0, this.listBudget = const []});
+  const BudgetFormPage({super.key});
 
   final String title = 'Program Counter';
-  int counter;
-  List<Budget> listBudget;
 
   @override
-  State<BudgetFormPage> createState() =>
-      _BudgetFormPageState(counter: counter, listBudget: listBudget);
-}
-
-class Budget {
-  String judul;
-  int nominal;
-  String jenis;
-
-  Budget(this.judul, this.nominal, this.jenis);
+  State<BudgetFormPage> createState() => _BudgetFormPageState();
 }
 
 class _BudgetFormPageState extends State<BudgetFormPage> {
-  _BudgetFormPageState({this.counter = 0, this.listBudget = const []});
-  int counter;
-  List<Budget> listBudget;
   final _formKey = GlobalKey<FormState>();
   String _judul = '';
   int _nominal = 0;
@@ -39,55 +25,7 @@ class _BudgetFormPageState extends State<BudgetFormPage> {
         appBar: AppBar(
           title: const Text('Form Budget'),
         ),
-        drawer: Drawer(
-          child: Column(
-            children: [
-              // Menambahkan clickable menu
-              ListTile(
-                title: const Text('counter_7'),
-                onTap: () {
-                  // Route menu ke halaman utama
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MyHomePage(
-                              counter: counter,
-                              listBudget: listBudget,
-                            )),
-                  );
-                },
-              ),
-              ListTile(
-                title: const Text('Tambah Budget'),
-                onTap: () {
-                  // Route menu ke halaman form
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => BudgetFormPage(
-                              counter: counter,
-                              listBudget: listBudget,
-                            )),
-                  );
-                },
-              ),
-              ListTile(
-                title: const Text('Data Budget'),
-                onTap: () {
-                  // Route menu ke halaman form
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => BudgetDataPage(
-                              counter: counter,
-                              listBudget: listBudget,
-                            )),
-                  );
-                },
-              ),
-            ],
-          ),
-        ),
+        drawer: mainDrawer(context),
         body: Form(
             key: _formKey,
             child: SingleChildScrollView(
@@ -183,16 +121,10 @@ class _BudgetFormPageState extends State<BudgetFormPage> {
                         TextButton(
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
-                              Budget newBudget =
-                                  Budget(_judul, _nominal, _jenis);
-                              listBudget.add(newBudget);
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => BudgetFormPage(
-                                        counter: counter,
-                                        listBudget: listBudget)),
-                              );
+                              setState(() {
+                                listBudget
+                                    .add(Budget(_judul, _nominal, _jenis));
+                              });
                             }
                           },
                           child: const Text(
