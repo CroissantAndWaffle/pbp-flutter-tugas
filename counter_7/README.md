@@ -47,3 +47,21 @@ Mengimplementasikan data passing pada ketiga file dart agar data tidak hilang sa
 - https://api.flutter.dev/flutter/widgets/Navigator/pushReplacement.html
 - https://api.flutter.dev/flutter/widgets/Listener-class.html
 - https://docs.flutter.dev/development/ui/navigation
+
+
+## Tugas 9
+
+### Pengambilan data JSON
+Pengambilan data JSON dapat dilakukan tanpa membuat model, namun variabel dari JSON nantinya harus di assign satu-persatu yang membuat implementasi menjadi jauh lebih membuang waktu.
+
+### Widget
+Widget yang saya pakai pada tugas kali ini adalah FutureBuilder yang digunakan untuk mengambil data dari JSON. Pada tampilan detail saya memakai column dan row.
+
+### Mekanisme pengambilan data JSON
+Mengambil data dari url JSON. Setelah itu, buatlah model yang memetakan data JSON yang akan digunakan dari HTTP response yang didapatkan dari url JSON. Setelah data sudah dipetakan seperti yang diperlukan, tampilkan lah pada page dart.
+
+### Implementasi
+Membuat model yang akan mengambil dan memetakan data dari url JSON. Membuat page menu yang menggunakan data title dari JSON untuk menampilkan menu watchlist yang ada pada JSON. Membuat page data yang menampilkan detail data dari title yang dipilih pada menu.
+
+### Refrensi
+- https://docs.flutter.dev/development/data-and-backend/json
